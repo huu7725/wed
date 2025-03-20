@@ -1,0 +1,158 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Authentication
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .hidden {
+     display: none;
+   }
+
+   .active {
+     display: block;
+   }
+  </style>
+ </head>
+ <body class="bg-white flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-sm p-6 border rounded-lg shadow-lg">
+   <!-- Sign In Form -->
+   <div class="active" id="sign-in-form">
+    <h1 class="text-2xl font-bold text-center mb-6">
+     Sign in
+    </h1>
+    <form class="space-y-4">
+     <div>
+      <input class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="USERNAME" type="text"/>
+     </div>
+     <div>
+      <input class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="PASSWORD" type="password"/>
+     </div>
+     <div class="flex justify-center space-x-4 mt-4">
+      <button class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+       <i class="fab fa-facebook-f text-white">
+       </i>
+      </button>
+      <button class="w-10 h-10 bg-white border rounded-full flex items-center justify-center">
+       <img alt="Google logo" src="https://placehold.co/20x20?text=G"/>
+      </button>
+      <button class="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+       <i class="fab fa-apple text-white">
+       </i>
+      </button>
+     </div>
+     <div class="flex items-center mt-4">
+      <input class="mr-2" id="stay-signed-in" type="checkbox"/>
+      <label class="text-gray-700" for="stay-signed-in">
+       Stay signed in
+      </label>
+     </div>
+     <div class="flex justify-center mt-6">
+      <button class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+       <i class="fas fa-arrow-right text-gray-700">
+       </i>
+      </button>
+     </div>
+    </form>
+    <div class="text-center mt-6">
+     <a class="text-gray-700 cursor-pointer" onclick="showSignUpForm()">
+      CREATE ACCOUNT
+     </a>
+     <br/>
+     <a class="text-gray-700 cursor-pointer" onclick="showForgotPasswordForm()">
+      FORGOT PASSWORD?
+     </a>
+    </div>
+   </div>
+   <!-- Sign Up Form -->
+   <div class="hidden" id="sign-up-form">
+    <h1 class="text-2xl font-bold text-center mb-6">
+     Sign Up
+    </h1>
+    <form class="space-y-4">
+     <div>
+      <input class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="USERNAME" type="text"/>
+     </div>
+     <div>
+      <input class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="PASSWORD" type="password"/>
+     </div>
+     <div>
+      <input class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="CONFIRM PASSWORD" type="password"/>
+     </div>
+     <div>
+      <input class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="EMAIL" type="email"/>
+     </div>
+     <div class="flex justify-center mt-6">
+      <button class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+       <i class="fas fa-arrow-right text-gray-700">
+       </i>
+      </button>
+     </div>
+    </form>
+    <div class="text-center mt-6">
+     <a class="text-gray-700 cursor-pointer" onclick="showSignInForm()">
+      ALREADY HAVE AN ACCOUNT? SIGN IN
+     </a>
+    </div>
+   </div>
+   <!-- Forgot Password Form -->
+   <div class="hidden" id="forgot-password-form">
+    <h1 class="text-2xl font-bold text-center mb-6">
+     Forgot Password
+    </h1>
+    <form class="space-y-4">
+     <div>
+      <input class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="EMAIL" type="email"/>
+     </div>
+     <div class="flex justify-center mt-6">
+      <button class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+       <i class="fas fa-arrow-right text-gray-700">
+       </i>
+      </button>
+     </div>
+    </form>
+    <div class="text-center mt-6">
+     <a class="text-gray-700 cursor-pointer" onclick="showSignInForm()">
+      BACK TO SIGN IN
+     </a>
+    </div>
+   </div>
+  </div>
+  <style>
+   #sign-in-form.active,
+   #sign-up-form.active,
+   #forgot-password-form.active {
+     display: block;
+   }
+
+   #sign-in-form.hidden,
+   #sign-up-form.hidden,
+   #forgot-password-form.hidden {
+     display: none;
+   }
+  </style>
+  <script>
+   function showSignUpForm() {
+     document.getElementById('sign-in-form').classList.add('hidden');
+     document.getElementById('sign-up-form').classList.remove('hidden');
+     document.getElementById('forgot-password-form').classList.add('hidden');
+   }
+
+   function showSignInForm() {
+     document.getElementById('sign-up-form').classList.add('hidden');
+     document.getElementById('sign-in-form').classList.remove('hidden');
+     document.getElementById('forgot-password-form').classList.add('hidden');
+   }
+
+   function showForgotPasswordForm() {
+     document.getElementById('sign-in-form').classList.add('hidden');
+     document.getElementById('sign-up-form').classList.add('hidden');
+     document.getElementById('forgot-password-form').classList.remove('hidden');
+   }
+  </script>
+ </body>
+</html>
