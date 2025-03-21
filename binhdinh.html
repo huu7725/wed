@@ -1,76 +1,658 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giới Thiệu Địa Điểm Du Lịch Bình Định</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8fafc;
+        body { background-color: #f8fafc; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 60%; text-align: center; max-height: 80%; overflow-y: auto; }
+        .close { float: right; font-size: 20px; cursor: pointer; }
+        .image-container { margin: 20px 0; }
+ /* Thanh menu cố định */
+ .navbar { 
+            position: fixed; top: 0; left: 0; width: 100%; background: white; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 1000; padding: 15px 0; 
         }
+        .navbar a { margin: 0 15px; color: #333; font-weight: bold; transition: 0.3s; }
+        .navbar a:hover { color: #007bff; }
+        /* Nút lên đầu trang */
+        #backToTop {
+            position: fixed; bottom: 20px; right: 20px; background: #007bff; 
+            color: white; padding: 10px 15px; border-radius: 5px; cursor: pointer; 
+            display: none; font-size: 16px;
+        }
+        #backToTop:hover { background: #0056b3; }
+        /* Hình ảnh trong modal */
+        .image-container img { width: 100%; height: auto; border-radius: 8px; }
+        .image-container .caption { font-size: 14px; color: #555; margin-top: 5px; }
+        /* Nút cuộn lên đầu trang */
+        #backToTop { display: none; }
+        #backToTop:hover { background: #0056b3; }
+        /* Nội dung chính có khoảng cách với menu */
+        .content { margin-top: 80px; }
+        /* Định dạng cho các nút trong modal */
+        .modal-content button { margin-top: 20px; background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .modal-content button:hover { background-color: #0056b3; }
+        /* Định dạng cho các tiêu đề trong modal */
+        .modal-content h2 { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+        .modal-content p { font-size: 16px; color: #555; }
+        /* Định dạng cho các caption trong modal */
+        .modal-content .caption { font-size: 14px; color: #555; margin-top: 5px; }
+         /* Banner có hình ảnh */
+         .banner {
+            position: relative;
+            background: url('banner.jpg') center/cover no-repeat;
+            height: 500px; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white;
+        }
+        
+        .banner-text {
+            position: relative; z-index: 1; max-width: 80%;
+        }
+        .banner-text h1 { font-size: 3rem; font-weight: bold; }
+        .banner-text p { font-size: 1.2rem; margin-top: 10px; }
+        .banner-image img { width: 100%; height: 100%; object-fit: cover; }
+
     </style>
 </head>
 <body>
-    <div class="container mx-auto p-6">
-        <h1 class="text-4xl font-bold text-center mb-6">Khám Phá Địa Điểm Du Lịch Bình Định</h1>
-        <p class="text-lg text-center mb-8">Bình Định là một tỉnh ven biển miền Trung Việt Nam, nổi tiếng với những bãi biển đẹp, di tích lịch sử và văn hóa phong phú.</p>
+   <!-- Thanh menu -->
+   <nav class="navbar text-center">
+    <a href="#">Trang Chủ</a>
+    <a href="#about">Giới Thiệu</a>
+    <a href="#destinations">Địa Điểm Du Lịch</a>
+    <a href="#map-section">Bản Đồ</a>
+    <a href="#contact">Liên Hệ</a>
+</nav>
+    <!-- Nút lên đầu trang -->
+    <div id="backToTop" onclick="scrollToTop()">↑</div>
+    <script>
+        window.onscroll = function() {
+            const backToTop = document.getElementById("backToTop");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTop.style.display = "block";
+            } else {
+                backToTop.style.display = "none";
+            }
+        };
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <br><br><br><br>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Địa điểm 1 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="c:\Users\ADMIN\OneDrive\Desktop\anh\rrr.jpg" alt="Bãi biển Kỳ Co" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold">Bãi Biển Kỳ Co</h2>
-                    <p class="text-gray-700">Bãi biển Kỳ Co nổi tiếng với làn nước trong xanh và cát trắng mịn, là điểm đến lý tưởng cho những ai yêu thích biển.</p>
+ 
+    <!-- Thanh menu -->
+    <nav class="navbar">
+        <a href="#">Trang Chủ</a>
+        <a href="#about">Giới Thiệu</a>
+        <a href="#destinations">Địa Điểm Du Lịch</a>
+        <a href="#food">Món Ăn Truyền Thống</a>
+        <a href="#map-section">Bản Đồ</a>
+        <a href="#contact">Liên Hệ</a>
+        <button id="toggle-theme" class="theme-btn">🌙</button>
+    </nav>
+    <div class="video-banner">
+        <video autoplay loop muted playsinline class="video-bg">
+            <source src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\6426775681160.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video.
+        </video>
+        <div class="overlay"></div>
+        <div class="banner-text">
+            <h1>Khám Phá Vẻ Đẹp Bình Định</h1>
+            <p>Thiên nhiên hoang sơ - Bãi biển tuyệt đẹp - Văn hóa đặc sắc</p>
+        </div>
+    </div>
+    
+    <style>
+        .video-banner {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .video-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .banner-text {
+            position: relative;
+            z-index: 1;
+            max-width: 80%;
+        }
+        .banner-text h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .banner-text p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+    </style>
+
+<style>
+    /* Chế độ sáng (mặc định) */
+    body {
+        background-color: #f8fafc;
+        color: #333;
+        transition: background 0.3s, color 0.3s;
+    }
+    .navbar {
+        position: fixed;
+        top: 0; left: 0; width: 100%;
+        background: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+        text-align: center;
+        transition: background 0.3s;
+    }
+    .navbar a {
+        margin: 0 15px;
+        color: #333;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+    .theme-btn {
+        background: transparent;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+    .container {
+        margin-top: 100px;
+        text-align: center;
+    }
+
+    /* Chế độ tối */
+    body.dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+    }
+    .dark-mode .navbar {
+        background: #222;
+        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    }
+    .dark-mode .navbar a {
+        color: #ffffff;
+    }
+</style>
+
+
+    <!-- Phần giới thiệu -->
+    <div id="about" class="container mx-auto p-6 text-center">
+        <div id="about" class="container mx-auto p-6 text-center">
+            <h2 class="text-3xl font-bold mb-6">Giới Thiệu Về Du Lịch Bình Định</h2>
+        <!-- Hình ảnh minh họa -->
+    <div class="flex justify-center mb-6">
+        <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\Quy-Nhon-Vnexpress-4396-155296-5049-3035-1558400805-compressed.jpg" alt="Du lịch Bình Định" class="w-2/3 rounded-lg shadow-lg">
+    </div>
+        <!-- Nội dung giới thiệu -->
+        <p class="text-gray-700 text-lg mb-4">
+            Bình Định là một tỉnh thuộc vùng duyên hải Nam Trung Bộ, nổi tiếng với thiên nhiên hoang sơ, 
+            bãi biển đẹp và những di tích lịch sử quan trọng. Đây là điểm đến lý tưởng cho du khách muốn trải nghiệm sự giao thoa giữa 
+            văn hóa, lịch sử và cảnh quan thiên nhiên.
+        </p>
+    
+        <h3 class="text-2xl font-bold mt-6">🌊 Thiên Nhiên Hùng Vĩ</h3>
+        <p class="text-gray-700 text-lg mt-2">
+            Với những bãi biển trải dài như Kỳ Co, Trung Lương và Hoàng Hậu, Bình Định được ví như "Maldives của Việt Nam". 
+            Đặc biệt, Đầm Thị Nại - đầm nước lớn nhất miền Trung - mang đến phong cảnh thơ mộng, hoang sơ.
+        </p>
+    
+        <h3 class="text-2xl font-bold mt-6">🏛️ Văn Hóa - Lịch Sử</h3>
+        <p class="text-gray-700 text-lg mt-2">
+            Bình Định còn là vùng đất của võ thuật cổ truyền và di sản Chăm Pa. Du khách có thể ghé thăm Tháp Đôi, Tháp Bánh Ít - những công trình kiến trúc 
+            Chăm độc đáo, hay tìm hiểu về cuộc đời người anh hùng áo vải Quang Trung tại Bảo tàng Quang Trung.
+        </p>
+    
+        <h3 class="text-2xl font-bold mt-6">🍜 Ẩm Thực Đặc Sắc</h3>
+        <p class="text-gray-700 text-lg mt-2">
+            Bình Định nổi tiếng với những món ngon như bánh hỏi cháo lòng, bún chả cá Quy Nhơn, nem chợ Huyện, và đặc biệt là rượu Bàu Đá trứ danh.
+        </p>
+    </div>
+    <!-- Nội dung chính -->
+    <div id="destinations" class="container mx-auto p-6">
+        <div class="container mx-auto p-6">
+            <h1 class="text-4xl font-bold text-center mb-6">Khám Phá Địa Điểm Du Lịch Bình Định</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Danh sách địa điểm -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="openModal('kyco')">
+                    <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\rrr.jpg" alt="Bãi Biển Kỳ Co" class="w-full h-48 object-cover">
+                    <div class="p-4"><h2 class="text-xl font-semibold">Bãi Biển Kỳ Co</h2></div>
                 </div>
-            </div>
 
-            <!-- Địa điểm 2 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="c:\Users\ADMIN\OneDrive\Desktop\anh\R.png" alt="Tháp Đôi" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold">Tháp Đôi</h2>
-                    <p class="text-gray-700">Tháp Đôi là một trong những di tích lịch sử nổi bật của Bình Định, thể hiện kiến trúc Chăm độc đáo.</p>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="openModal('thapdoi')">
+                    <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\R.png" alt="Tháp Đôi" class="w-full h-48 object-cover">
+                    <div class="p-4"><h2 class="text-xl font-semibold">Tháp Đôi</h2></div>
                 </div>
-            </div>
 
-            <!-- Địa điểm 3 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="c:\Users\ADMIN\OneDrive\Desktop\anh\OIP (1).jpg" alt="Bãi biển Hoàng Hậu" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold">Bãi Biển Hoàng Hậu</h2>
-                    <p class="text-gray-700">Bãi biển Hoàng Hậu với cảnh quan thiên nhiên tuyệt đẹp, là nơi lý tưởng để thư giãn và tận hưởng không khí trong lành.</p>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="openModal('damthinai')">
+                    <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\damthinai.jpg" alt="Đầm Thị Nại" class="w-full h-48 object-cover">
+                    <div class="p-4"><h2 class="text-xl font-semibold">Đầm Thị Nại</h2></div>
                 </div>
-            </div>
 
-            <!-- Địa điểm 4 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="c:\Users\ADMIN\OneDrive\Desktop\anh\damthinai.jpg" alt="Đầm Thị Nại" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold">Đầm Thị Nại</h2>
-                    <p class="text-gray-700">Đầm Thị Nại là một trong những đầm nước lớn nhất miền Trung, nổi tiếng với cảnh đẹp và các hoạt động thể thao dưới nước.</p>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="openModal('hoanghau')">
+                    <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\OIP (1).jpg" alt="Bãi Tắm Hoàng Hậu" class="w-full h-48 object-cover">
+                    <div class="p-4"><h2 class="text-xl font-semibold">Bãi Tắm Hoàng Hậu</h2></div>
                 </div>
-            </div>
 
-            <!-- Địa điểm 5 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="c:\Users\ADMIN\OneDrive\Desktop\anh\OIP.jpg" alt="Chùa Thiên Hưng" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold">Chùa Thiên Hưng</h2>
-                    <p class="text-gray-700">Chùa Thiên Hưng là một ngôi chùa cổ kính, nổi tiếng với kiến trúc đẹp và không gian yên tĩnh.</p>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="openModal('thienhung')">
+                    <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\OIP.jpg" alt="Chùa Thiên Hưng" class="w-full h-48 object-cover">
+                    <div class="p-4"><h2 class="text-xl font-semibold">Chùa Thiên Hưng</h2></div>
                 </div>
-            </div>
 
-            <!-- Địa điểm 6 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="c:\Users\ADMIN\OneDrive\Desktop\anh\bai-bien-trung-luong.jpg" alt="Bãi biển Trung Lương" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold">Bãi Biển Trung Lương</h2>
-                    <p class="text-gray-700">Bãi biển Trung Lương là một trong những bãi biển đẹp nhất Bình Định, với không gian thoáng đãng và dịch vụ tốt.</p>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="openModal('trungluong')">
+                    <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\bai-bien-trung-luong.jpg" alt="Bãi Biển Trung Lương" class="w-full h-48 object-cover">
+                    <div class="p-4"><h2 class="text-xl font-semibold">Bãi Biển Trung Lương</h2></div>
                 </div>
             </div>
         </div>
     </div>
+
+<!-- Phần món ăn truyền thống -->
+<div id="food" class="container mx-auto p-6 text-center">
+    <h2 class="text-3xl font-bold mb-6">🍜 Món Ăn Truyền Thống Bình Định</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Bánh hỏi cháo lòng -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden p-4 cursor-pointer" onclick="openModal('banhhoi')">
+            <img src="banh-hoi.jpg" alt="Bánh Hỏi Cháo Lòng" class="w-full h-48 object-cover">
+            <h3 class="text-xl font-semibold mt-4">Bánh Hỏi Cháo Lòng</h3>
+            <p class="text-gray-700 mt-2">Món ăn đặc trưng với bánh hỏi mềm mịn ăn kèm cháo lòng.</p>
+        </div>
+
+        <!-- Bún chả cá Quy Nhơn -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden p-4 cursor-pointer" onclick="openModal('buncha')">
+            <img src="bun-cha-ca.jpg" alt="Bún Chả Cá Quy Nhơn" class="w-full h-48 object-cover">
+            <h3 class="text-xl font-semibold mt-4">Bún Chả Cá Quy Nhơn</h3>
+            <p class="text-gray-700 mt-2">Hương vị đậm đà với nước dùng thanh ngọt từ cá.</p>
+        </div>
+    </div>
+</div>
+<!-- Modal chi tiết món ăn -->
+<div id="modal-banhhoi" class="modal flex">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('banhhoi')">&times;</span>
+        <h2 class="text-2xl font-bold">Bánh Hỏi Cháo Lòng</h2>
+        <p class="text-gray-700 mt-2">
+            Bánh hỏi là món ăn đặc sản của Bình Định, được làm từ bột gạo, hấp chín và tạo thành từng sợi mỏng giống bún nhưng mịn hơn.
+            Món ăn này thường được ăn kèm với cháo lòng, hành lá phi thơm và đậu phộng rang giòn.
+        </p>
+
+        <div class="mt-4 flex flex-col items-center">
+            <div class="image-container">
+                <img src="banh-hoi1.jpg" class="w-2/3 rounded-lg">
+                <p class="caption mt-2">📍 Hình 1: Đĩa bánh hỏi rắc hành lá, ăn kèm lòng heo.</p>
+            </div>
+
+            <div class="image-container mt-4">
+                <img src="banh-hoi2.jpg" class="w-2/3 rounded-lg">
+                <p class="caption mt-2">📍 Hình 2: Cháo lòng nóng hổi, ăn cùng bánh hỏi.</p>
+            </div>
+
+            <div class="image-container mt-4">
+                <img src="banh-hoi3.jpg" class="w-2/3 rounded-lg">
+                <p class="caption mt-2">📍 Hình 3: Cách bày trí bánh hỏi truyền thống của người Bình Định.</p>
+            </div>
+        </div>
+
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal('banhhoi')">Đóng</button>
+    </div>
+</div>
+
+<div id="modal-buncha" class="modal flex">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('buncha')">&times;</span>
+        <h2 class="text-2xl font-bold">Bún Chả Cá Quy Nhơn</h2>
+        <p class="text-gray-700 mt-2">
+            Bún chả cá Quy Nhơn có nước dùng trong, thanh ngọt tự nhiên từ xương cá. Chả cá làm từ cá tươi như cá thu, cá mối,
+            được giã nhuyễn rồi chiên hoặc hấp, tạo nên vị dai ngon đặc trưng.
+        </p>
+
+        <div class="mt-4 flex flex-col items-center">
+            <div class="image-container">
+                <img src="bun-cha1.jpg" class="w-2/3 rounded-lg">
+                <p class="caption mt-2">📍 Hình 1: Tô bún chả cá với nước dùng trong veo, hấp dẫn.</p>
+            </div>
+
+            <div class="image-container mt-4">
+                <img src="bun-cha2.jpg" class="w-2/3 rounded-lg">
+                <p class="caption mt-2">📍 Hình 2: Chả cá được chiên vàng, giòn rụm bên ngoài, mềm bên trong.</p>
+            </div>
+
+            <div class="image-container mt-4">
+                <img src="bun-cha3.jpg" class="w-2/3 rounded-lg">
+                <p class="caption mt-2">📍 Hình 3: Một phần bún chả cá đúng chuẩn Bình Định với rau sống và tương ớt.</p>
+            </div>
+        </div>
+
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal('buncha')">Đóng</button>
+    </div>
+</div>
+
+<script>
+    function openModal(id) {
+        document.getElementById("modal-" + id).style.display = "flex";
+    }
+    function closeModal(id) {
+        document.getElementById("modal-" + id).style.display = "none";
+    }
+</script>
+
+<br><br><br><br><br><br>
+ <!-- Phần bản đồ -->
+ <div id="map-section" class="container mx-auto p-6 mt-12 text-center">
+    <h2 class="text-3xl font-bold mb-4">Bản Đồ Địa Điểm Du Lịch</h2>
+    <p class="text-gray-600 mb-4">Dưới đây là vị trí các địa điểm du lịch nổi bật tại Bình Định.</p>
+
+    <!-- Google Maps -->
+    <div class="w-full h-96">
+        <iframe class="w-full h-full rounded-lg"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.682768459304!2d109.21940017457934!3d13.778586387652206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f6cf377f8d17d%3A0xf8d5bd256fe4cf3!2zS2nhu4NuIFJhbmcgLSBCw6FpIHTDoW0gSG_DoG5nIEjhu6U!5e0!3m2!1sen!2s!4v1643123456789"
+            allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <!-- Nút mở Google Maps -->
+    <button onclick="openGoogleMaps()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-600 transition">
+        Xem trên Google Maps
+    </button>
+</div>
+
+<script>
+    function openGoogleMaps() {
+        window.open("https://www.google.com/maps/search/?api=1&query=Bình+Định", "_blank");
+    }
+</script>
+
+<div id="contact" class="bg-gray-100 py-12 px-6 mt-12">
+    <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl font-bold">Liên Hệ Chúng Tôi</h2>
+        <p class="text-gray-600 mt-2">Hãy để lại thông tin, chúng tôi sẽ phản hồi sớm nhất!</p>
+
+        <!-- Biểu mẫu liên hệ -->
+        <form class="mt-6 bg-white p-6 shadow-lg rounded-lg">
+            <div class="mb-4">
+                <label class="block text-left font-semibold mb-2">Họ và Tên</label>
+                <input type="text" class="w-full p-3 border rounded-lg" placeholder="Nhập họ và tên" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-left font-semibold mb-2">Email</label>
+                <input type="email" class="w-full p-3 border rounded-lg" placeholder="Nhập email" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-left font-semibold mb-2">Nội dung</label>
+                <textarea class="w-full p-3 border rounded-lg" rows="4" placeholder="Nhập nội dung tin nhắn" required></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-600 transition">Gửi Tin Nhắn</button>
+        </form>
+
+        <!-- Thông tin liên hệ -->
+        <div class="mt-6 text-gray-700">
+            <p><strong>📍 Địa chỉ:</strong> Quy Nhơn, Bình Định</p>
+            <p><strong>📞 Số điện thoại:</strong> 0976738769</p>
+            <p><strong>✉ Email:</strong> huunguyenthuan77@gmail.com</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal chi tiết cho Bãi Biển Kỳ Co -->
+<div id="modal-kyco" class="modal flex">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('kyco')">&times;</span>
+        <h2 class="text-2xl font-bold">Bãi Biển Kỳ Co</h2>
+        <p class="mt-2 text-gray-700">Bãi biển Kỳ Co nổi tiếng với nước xanh trong và bãi cát trắng mịn, là điểm du lịch hấp dẫn tại Quy Nhơn.</p>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\du-lich-ky-co-quy-nhon.jpeg" alt="Bãi cát trắng Kỳ Co">
+            <p class="caption">📍 Hình 1: Bãi cát trắng trải dài, lý tưởng để thư giãn và dạo biển.</p>
+        </div>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\bai-bien-ky-co.webp" alt="Nước biển trong xanh">
+            <p class="caption">📍 Hình 2: Nước biển xanh trong, thu hút du khách đến lặn ngắm san hô.</p>
+        </div>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\rrr.jpg" alt="Hoàng hôn trên biển">
+            <p class="caption">📍 Hình 3: Hoàng hôn tuyệt đẹp trên biển Kỳ Co, tạo nên cảnh sắc lãng mạn.</p>
+        </div>
+
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal('kyco')">Đóng</button>
+    </div>
+</div>
+<!-- Modal chi tiết cho Tháp Đôi -->
+<div id="modal-thapdoi" class="modal flex">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('thapdoi')">&times;</span>
+        <h2 class="text-2xl font-bold">Bãi Biển Kỳ Co</h2>
+        <p class="mt-2 text-gray-700">Bãi biển Kỳ Co nổi tiếng với nước xanh trong và bãi cát trắng mịn, là điểm du lịch hấp dẫn tại Quy Nhơn.</p>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\kien-truc-dieu-khac-thap-doi-quy-nhon.png" alt="Tháp đôi Bình Định">
+            <p class="caption">📍 Hình 1: Kiến trúc tháp đôi từ thời xưa.</p>
+        </div>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\R.png" alt="Tháp đôi khi đón hoàng hôn">
+            <p class="caption">📍 Hình 2: Tháp đôi khi hoàng hôn buông xuống.</p>
+        </div>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\q.jpg" alt="Tháp đôi"> 
+            <p class="caption">📍 Hình 3: Vẻ đẹp tháp đôi.</p>
+        </div>
+
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal('thapdoi')">Đóng</button>
+    </div>
+</div>
+<!-- Modal chi tiết cho Đầm Thị Nại -->
+<div id="modal-damthinai" class="modal flex">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('damthinai')">&times;</span>
+        <h2 class="text-2xl font-bold">Đầm Thị Nại</h2>
+        <p class="mt-2 text-gray-700">Đầm Thị Nại là một trong những đầm nước ngọt lớn nhất miền Trung, nổi tiếng với cảnh đẹp hoang sơ và bình yên.</p>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\dam-thi-nai-1.jpg" alt="Cảnh đẹp Đầm Thị Nại">
+            <p class="caption">📍 Hình 1: Cảnh đẹp hoang sơ của Đầm Thị Nại, lý tưởng cho những ai yêu thích thiên nhiên.</p>
+        </div>
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\dam-thi-nai-2.jpg" alt="Hoàng hôn trên Đầm Thị Nại">
+            <p class="caption">📍 Hình 2: Hoàng hôn tuyệt đẹp trên Đầm Thị Nại, tạo nên cảnh sắc </p>
+        </div>
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\dam-thi-nai-3.jpg" alt="Đầm Thị Nại">
+            <p class="caption">📍 Hình 3: Đầm Thị Nại với cảnh quan thiên nhiên tuyệt đẹp, thu hút nhiều du khách đến tham quan.</p>
+        </div>
+
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal('damthinai')">Đóng</button>
+    </div>
+</div>
+<!-- Modal chi tiết cho Bãi Tắm Hoàng Hậu -->
+<div id="modal-hoanghau" class="modal flex">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('hoanghau')">&times;</span>
+        <h2 class="text-2xl font-bold">Bãi Tắm Hoàng Hậu</h2>
+        <p class="mt-2 text-gray-700">Bãi tắm Hoàng Hậu nổi tiếng với cảnh quan thiên nhiên tuyệt đẹp, là điểm đến lý tưởng cho du khách.</p>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\con-duong-nen-tho-dan-den-bai-tam-hoang-hau.jpg" alt="Bãi tắm Hoàng Hậu">
+            <p class="caption">📍 Hình 1: Bãi tắm Hoàng Hậu với bãi cát trắng và nước biển trong xanh.</p>
+        </div>
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\bai-trung-bai-tam-hoang-hau.jpg" alt="Cảnh biển Hoàng Hậu">
+            <p class="caption">📍 Hình 2: Cảnh biển Hoàng Hậu tuyệt đẹp, thu hút nhiều du khách đến tham quan.</p>
+        </div>
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\mot-sac-hoang-hon-ben-troi-bien-hoang-hau-quy-nhon.jpg" alt="Bãi tắm Hoàng Hậu">
+            <p class="caption">📍 Hình 3: Bãi tắm Hoàng Hậu với cảnh quan thiên nhiên tuyệt đẹp.</p>
+                </div>
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal('hoanghau')">Đóng</button>
+    </div>
+</div>
+<!-- Modal chi tiết cho Chùa Thiên Hưng -->
+<div id="modal-thienhung" class="modal flex">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('thienhung')">&times;</span>
+        <h2 class="text-2xl font-bold">Chùa Thiên Hưng</h2>
+        <p class="mt-2 text-gray-700">Chùa Thiên Hưng là một ngôi chùa cổ kính với kiến trúc đẹp và không gian yên tĩnh, là nơi lý tưởng để tìm về sự bình yên.</p>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\ve-dep-kien-truc-chua-thien-hung.jpg" alt="Chùa Thiên Hưng">
+            <p class="caption">📍 Hình 1: Chùa Thiên Hưng với kiến trúc độc đáo và không gian yên tĩnh.</p>
+        </div>
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\thien-vien-thien-hung.jpg" alt="Chùa Thiên Hưng">
+            <p class="caption">📍 Hình 2: Cảnh quan xung quanh chùa, tạo nên không gian thanh tịnh.</p>
+                </div>
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\chua-thien-hung-binh-dinh-dia-diem-tam-linh-noi-tieng-viet-nam.jpg" alt="Chùa Thiên Hưng">
+            <p class="caption">📍 Hình 3: Chùa Thiên Hưng với kiến trúc độc đáo và không gian yên tĩnh.</p>
+        </div>
+
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal('thienhung')">Đóng</button>
+    </div>
+</div>
+<!-- Modal chi tiết cho Bãi Biển Trung Lương -->
+<div id="modal-trungluong" class="modal flex">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('trungluong')">&times;</span>
+        <h2 class="text-2xl font-bold">Bãi Biển Trung Lương</h2>
+        <p class="mt-2 text-gray-700">Bãi biển Trung Lương nổi tiếng với không gian thoáng đãng và dịch vụ tốt, là điểm đến lý tưởng cho du khách.</p>
+
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\10522-e1506077000136.jpg" alt="Bãi biển Trung Lương">
+            <p class="caption">📍 Hình 1: Bãi biển Trung Lương với bãi cát trắng và nước biển trong xanh.</p>
+        </div>
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\DSC_6057-e1506077080661.jpg" alt="Bãi biển Trung Lương">
+            <p class="caption">📍 Hình 2: Không gian thoáng đãng, lý tưởng để thư giãn và tắm biển.</p>
+        </div>
+        <div class="image-container">
+            <img src="c:\Users\ADMIN\OneDrive\Desktop\wed\anh\ddd.jpg" alt="Bãi biển Trung Lương">
+            <p class="caption">📍 Hình 3: Bãi biển Trung Lương với cảnh quan thiên nhiên tuyệt đẹp.</p>
+        </div>
+
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal('trungluong')">Đóng</button>
+    </div>
+</div>
+<style>
+    /* Chế độ sáng (mặc định) */
+    body {
+        background-color: #f8fafc;
+        color: #333;
+        transition: background 0.3s, color 0.3s;
+    }
+    .navbar {
+        position: fixed;
+        top: 0; left: 0; width: 100%;
+        background: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+        text-align: center;
+        transition: background 0.3s;
+    }
+    .navbar a {
+        margin: 0 15px;
+        color: #333;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+    .theme-btn {
+        background: transparent;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+    .container {
+        margin-top: 100px;
+        text-align: center;
+    }
+
+    /* Chế độ tối */
+    body.dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+    }
+    .dark-mode .navbar {
+        background: #222;
+        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    }
+    .dark-mode .navbar a {
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const themeToggle = document.getElementById("toggle-theme");
+        const body = document.body;
+
+        // Kiểm tra chế độ đã lưu trong Local Storage
+        if (localStorage.getItem("theme") === "dark") {
+            body.classList.add("dark-mode");
+            themeToggle.textContent = "☀️";
+        }
+
+        themeToggle.addEventListener("click", function() {
+            body.classList.toggle("dark-mode");
+
+            // Cập nhật biểu tượng & lưu trạng thái
+            if (body.classList.contains("dark-mode")) {
+                themeToggle.textContent = "☀️";
+                localStorage.setItem("theme", "dark");
+            } else {
+                themeToggle.textContent = "🌙";
+                localStorage.setItem("theme", "light");
+            }
+        });
+    });
+</script>
+
+    <script>
+        function openModal(id) { document.getElementById("modal-" + id).style.display = "flex"; }
+        function closeModal(id) { document.getElementById("modal-" + id).style.display = "none"; }
+         // Hiển thị nút "Lên đầu trang" khi cuộn xuống
+         window.onscroll = function() {
+            var btn = document.getElementById("backToTop");
+            if (document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        // Cuộn lên đầu trang
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+
+      <!-- Chân trang -->
+      <footer class="bg-gray-800 text-white text-center py-4 mt-12">
+        <p>&copy; 2024 Du Lịch Bình Định. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
